@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:overScrollMode="never"
+    android:scrollIndicators="none"
+    android:scrollbars="none"
+    tools:context=".ui.MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/offlineIcon"
+            android:layout_width="200dp"
+            android:layout_height="230dp"
+            android:src="@drawable/offline"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/dailyWeatherStateRecycler"
+            app:layout_constraintEnd_toEndOf="@+id/cardOfCurrentWeather"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/cardOfCurrentWeather"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.32999998" />
+
+        <TextView
+            android:id="@+id/errorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/black_200"
+            android:textSize="16sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@id/offlineIcon"
+            app:layout_constraintStart_toStartOf="@id/offlineIcon"
+            app:layout_constraintTop_toBottomOf="@id/offlineIcon" />
+
+        <TextView
+            android:id="@+id/retryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/retry_shape"
+            android:drawableEnd="@drawable/ic_restart"
+            android:drawablePadding="8dp"
+            android:paddingStart="18dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="18dp"
+            android:paddingBottom="8dp"
+            android:text="Retry"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@id/errorMessage"
+            app:layout_constraintStart_toStartOf="@id/errorMessage"
+            app:layout_constraintTop_toBottomOf="@id/errorMessage" />
+
+
+        <EditText
+            android:id="@+id/editSearch"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/search_shape"
+            android:hint="search..."
+            android:padding="8dp"
+            android:paddingStart="16dp"
+            android:textColor="@color/purple_400"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/cardOfCurrentWeather"
+            app:layout_constraintStart_toStartOf="@id/cardOfCurrentWeather"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/searching"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:clickable="true"
+            android:src="@drawable/ic_search"
+            app:layout_constraintBottom_toBottomOf="@id/editSearch"
+            app:layout_constraintEnd_toEndOf="@id/editSearch"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@id/editSearch"
+            app:layout_constraintTop_toTopOf="@id/editSearch" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardOfCurrentWeather"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="@color/white_100"
+            app:cardCornerRadius="36dp"
+            app:cardElevation="0dp"
+            app:contentPaddingBottom="16dp"
+            app:contentPaddingTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editSearch"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/currentIconWeather"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/temperature"
+            app:layout_constraintEnd_toEndOf="@+id/cardOfCurrentWeather"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/cardOfCurrentWeather"
+            app:layout_constraintTop_toTopOf="@+id/cardOfCurrentWeather"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple_400"
+            android:textSize="28sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/currentStateWeather"
+            app:layout_constraintEnd_toEndOf="@+id/currentIconWeather"
+            app:layout_constraintStart_toStartOf="@+id/currentIconWeather" />
+
+        <TextView
+            android:id="@+id/currentStateWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/purple_400"
+            android:textSize="28sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/date"
+            app:layout_constraintEnd_toEndOf="@+id/temperature"
+            app:layout_constraintStart_toStartOf="@+id/temperature" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/purple_400"
+            android:textSize="14sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/materialDivider"
+            app:layout_constraintEnd_toEndOf="@+id/currentStateWeather"
+            app:layout_constraintStart_toStartOf="@+id/currentStateWeather" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/materialDivider"
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/purple_trans"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/iconHumidity"
+            app:layout_constraintEnd_toEndOf="@+id/cardOfCurrentWeather"
+            app:layout_constraintStart_toStartOf="@+id/cardOfCurrentWeather"
+            app:layout_constraintVertical_bias="0.65" />
+
+        <ImageView
+            android:id="@+id/iconWind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_wind"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/tempWind"
+            app:layout_constraintStart_toStartOf="@+id/materialDivider" />
+
+        <TextView
+            android:id="@+id/tempWind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/purple_400"
+            android:textSize="14sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/txtWind"
+            app:layout_constraintEnd_toEndOf="@+id/iconWind"
+            app:layout_constraintStart_toStartOf="@+id/iconWind" />
+
+        <TextView
+            android:id="@+id/txtWind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Wind"
+            android:textColor="@color/purple_400"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/cardOfCurrentWeather"
+            app:layout_constraintEnd_toEndOf="@+id/tempWind"
+            app:layout_constraintStart_toStartOf="@+id/tempWind" />
+
+        <ImageView
+            android:id="@+id/iconHumidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_humidity"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/tempHumidity"
+            app:layout_constraintEnd_toStartOf="@+id/iconClouds"
+            app:layout_constraintStart_toEndOf="@+id/iconWind" />
+
+        <TextView
+            android:id="@+id/tempHumidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="-----"
+            android:textColor="@color/purple_400"
+            android:textSize="14sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/txtHumidity"
+            app:layout_constraintEnd_toEndOf="@+id/iconHumidity"
+            app:layout_constraintStart_toStartOf="@+id/iconHumidity" />
+
+        <TextView
+            android:id="@+id/txtHumidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Humidity"
+            android:textColor="@color/purple_400"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/cardOfCurrentWeather"
+            app:layout_constraintEnd_toEndOf="@+id/tempHumidity"
+            app:layout_constraintStart_toStartOf="@+id/tempHumidity" />
+
+        <ImageView
+            android:id="@+id/iconClouds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="18dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_clouds"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/tempClouds"
+            app:layout_constraintEnd_toEndOf="@+id/materialDivider" />
+
+        <TextView
+            android:id="@+id/tempClouds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="-----"
+            android:textColor="@color/purple_400"
+            android:textSize="14sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/txtClouds"
+            app:layout_constraintEnd_toEndOf="@+id/iconClouds"
+            app:layout_constraintStart_toStartOf="@+id/iconClouds" />
+
+        <TextView
+            android:id="@+id/txtClouds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Clouds"
+            android:textColor="@color/purple_400"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/cardOfCurrentWeather"
+            app:layout_constraintEnd_toEndOf="@+id/tempClouds"
+            app:layout_constraintStart_toStartOf="@+id/tempClouds" />
+
+
+        <TextView
+            android:id="@+id/weatherFor7Days"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="18dp"
+            android:text="Weather for 7 days"
+            android:textColor="@color/black_200"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/cardOfCurrentWeather"
+            app:layout_constraintStart_toStartOf="@+id/cardOfCurrentWeather"
+            app:layout_constraintTop_toBottomOf="@id/cardOfCurrentWeather" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loadingCard"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cardOfCurrentWeather"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading_data"
+            app:lottie_speed="1" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dailyWeatherStateRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/white"
+            android:overScrollMode="never"
+            android:visibility="invisible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weatherFor7Days"
+            app:layout_constraintVertical_bias="0.0"
+            tools:itemCount="2"
+            tools:listitem="@layout/daily_state" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
